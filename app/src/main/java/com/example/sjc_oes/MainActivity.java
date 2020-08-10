@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
 
     private TextView collegeName,collegePlace,versionString,designString1,designString2,infoString;
     EditText password;
-    private Button buttonBack,buttonNext;
+    private Button buttonBack,buttonNext,buttonrefresh;
     private Spinner spinner;
     private ImageView collegeLogo;
     private ArrayList<String> dataList;
@@ -43,9 +44,12 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
 
         initComponents();
 
+        //======================= Listener for next Button =================================================
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                infoString.setTextColor(Color.BLACK);
                 loadinganimation.playAnimation();
                 loadinganimation.setVisibility(View.VISIBLE);
                 buttonBack.setVisibility(View.INVISIBLE);
@@ -55,12 +59,18 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
             }
         });
 
+        //======================= Listener for back Button =================================================
+
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                infoString.setTextColor(Color.BLACK);
                 presenterClass.onBackButtonPressed(PositionSelected);
             }
         });
+
+
+        //======================= Listener for spinner =================================================
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -73,6 +83,21 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
 
             }
         });
+
+
+        //======================= Listener for Refresh Button =================================================
+
+        buttonrefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoString.setTextColor(Color.BLACK);
+                loadinganimation.setVisibility(View.VISIBLE);
+                loadinganimation.playAnimation();
+                presenterClass.Refresh(0);
+                buttonrefresh.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
     private void initComponents(){
         spinner = findViewById(R.id.spinner);
@@ -84,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
         infoString = findViewById(R.id.infostring);
         buttonBack = findViewById(R.id.button_back);
         buttonNext = findViewById(R.id.button_next);
+        buttonrefresh = findViewById(R.id.button_refresh);
+        buttonrefresh.setVisibility(View.INVISIBLE);
         collegeLogo = findViewById(R.id.clg_logo);
         password = findViewById(R.id.password);
         password.setVisibility(View.INVISIBLE);
@@ -145,11 +172,22 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
     public void Showerrormsg(String error) {
         //pause the animation
         loadinganimation.pauseAnimation();
-        loadinganimation.setVisibility(View.GONE);
+        loadinganimation.setVisibility(View.INVISIBLE);
 
         // show the message
+        infoString.setTextColor(Color.RED);
         infoString.setText(error);
+        buttonrefresh.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void ReportPasswordError() {
+        infoString.setTextColor(Color.RED);
+        loadinganimation.pauseAnimation();
+        loadinganimation.setVisibility(View.INVISIBLE);
+        buttonBack.setVisibility(View.VISIBLE);
+        buttonNext.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.INVISIBLE);
     }
 
     @Override

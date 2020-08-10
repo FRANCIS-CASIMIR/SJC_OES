@@ -63,7 +63,8 @@ app:layout_constraintTop_toBottomOf="@+id/clgplace" />
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clg_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/clg_logo"
+        tools:gravity="center" />
 
 <TextView
 android:id="@+id/clgname"
@@ -166,5 +167,18 @@ app:layout_constraintTop_toBottomOf="@+id/infostring" />
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading4"></com.airbnb.lottie.LottieAnimationView>
+
+    <Button
+        android:id="@+id/button_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="Refresh"
+        android:textAllCaps="false"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toTopOf="@+id/design1string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

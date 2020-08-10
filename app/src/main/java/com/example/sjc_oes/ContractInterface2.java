@@ -23,5 +23,7 @@ public interface ContractInterface2 {
         void ShowError(String Error);
         void ShowRetryoptions();
         void ShowRestartoptions();
+        void ShowWhite();
+        void ShowRed();
     }
 }

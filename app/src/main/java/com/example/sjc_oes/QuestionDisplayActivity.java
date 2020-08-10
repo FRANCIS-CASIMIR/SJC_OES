@@ -1,6 +1,7 @@
 package com.example.sjc_oes;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -142,9 +143,7 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Contra
     }
 
     @Override
-    public void alertUser() {
-        remainingTime.setBackgroundResource(R.drawable.timebackground_red);
-    }
+    public void alertUser() { remainingTime.setBackgroundResource(R.drawable.timebackground_red); }
 
     @Override
     public void updatetype1question(String qnumber,String question,String choice1,String choice2,String choice3,String choice4) {
@@ -403,5 +402,18 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Contra
         nextQuestion.setVisibility(View.VISIBLE);
         nextQuestion.setText("Restart");
     }
+
+    @Override
+    public void ShowWhite() {
+        remainingTime.setTextColor(Color.BLACK);
+        remainingTime.setBackgroundResource(R.drawable.timebackgroundwhite);
+    }
+
+    @Override
+    public void ShowRed() {
+        remainingTime.setTextColor(Color.WHITE);
+        remainingTime.setBackgroundResource(R.drawable.timebackground_red);
+    }
+
 
 }

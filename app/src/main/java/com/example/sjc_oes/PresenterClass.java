@@ -13,8 +13,9 @@ class PresenterClass implements ContractInterface.Presenter {
     private Subjects subjects;
     private RequestQueue requestQueue;
     private int PressedTimes;
-    private String DepartmentName,CourseName,SubjectName,DNumber,SubjectId;
+    private String DepartmentName,CourseName,SubjectName,DNumber,SubjectId,PasswordfromDB;
     Student student;
+
 
 
     PresenterClass(RequestQueue requestQueue, ContractInterface.View view){
@@ -60,6 +61,8 @@ class PresenterClass implements ContractInterface.Presenter {
                 break;
             case 3:
                 this.DNumber = dnumbers.getDNumber(position);
+                this.PasswordfromDB = dnumbers.getPassword(position);
+                System.out.println("===============================>Password is set");
                 student = new Student(DNumber,DepartmentName,CourseName,SubjectName,SubjectId);
                 view.showMessage(this.DNumber+" Enter Your Password");
                 view.Hidespinner();
@@ -69,12 +72,13 @@ class PresenterClass implements ContractInterface.Presenter {
             default:
                 System.out.println("Case default");
                 System.out.println("============>User Password"+view.getpasswordfromuser());
-                if(view.getpasswordfromuser().compareTo(dnumbers.getPassword(position))==0){
+                if(view.getpasswordfromuser().compareTo(PasswordfromDB)==0){
                     view.startIntent(student);
                 }else{
                     view.showMessage("Incorrect Password");
+                    view.ReportPasswordError();
                 }
-
+                break;
         }
     }
 
@@ -126,5 +130,11 @@ class PresenterClass implements ContractInterface.Presenter {
     public void PresentDataset(ArrayList<String> strings,String Message) {
         view.updateArrayList(strings);
         view.showMessage(Message);
+    }
+
+    @Override
+    public void Refresh(int pressedTimes) {
+        PressedTimes = pressedTimes;
+        getDataSet();
     }
 }

@@ -7,9 +7,8 @@ public class QuestionPresenter implements ContractInterface2.QuestionPresenterIn
 
     private ContractInterface2.QuestionView questionView;
     private Questions questions;
-    //private ArrayList<String> al;
     private int RunningQuestion;
-    private int Choice ,NumberofError;
+    private int Choice ,NumberofError,TimeBlinker=1;
     Student student;
     Timer timer;
     private boolean TestFinished,ErrorReported;
@@ -100,6 +99,16 @@ public class QuestionPresenter implements ContractInterface2.QuestionPresenterIn
     public void AlertUser(){
         questionView.alertUser();
     }
+
+    public void BlinkTime(){
+        if(TimeBlinker%2==0){
+            questionView.ShowRed();
+        }else {
+            questionView.ShowWhite();
+        }
+        TimeBlinker++;
+    }
+
     public void updateresponsestodb(){
         TestFinished = true;
         questionView.showUpdatingMessage();

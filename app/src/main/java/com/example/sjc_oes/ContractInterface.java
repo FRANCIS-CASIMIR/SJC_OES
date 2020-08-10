@@ -10,6 +10,7 @@ interface ContractInterface {
         void PresentDataset(ArrayList<String> strings, String Message);
         void ShowLoadingInfo();
         void Reporterror(String error);
+        void Refresh(int pressedTimes);
     }
     interface View{
         void updateArrayList(ArrayList<String> arrayList);
@@ -19,5 +20,7 @@ interface ContractInterface {
         void unHidespinner();
         String getpasswordfromuser();
         void Showerrormsg(String error);
+        void ReportPasswordError();
+
     }
 }

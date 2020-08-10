@@ -39,8 +39,11 @@ public class Timer extends AsyncTask<Void,Void,Void> {
         super.onProgressUpdate(values);
         Mins = Miniutes<10 ? "0"+Miniutes : Miniutes+"";
         Secs = Seconds<10 ? "0"+Seconds : Seconds+"";
-        if(Miniutes==5&&Seconds==59) {
+        if(Miniutes==5&&Seconds==0) {
             questionPresenter.AlertUser();
+        }
+        if(Miniutes<=0){
+            questionPresenter.BlinkTime();
         }
         questionPresenter.setTime(Mins+" : "+Secs);
 

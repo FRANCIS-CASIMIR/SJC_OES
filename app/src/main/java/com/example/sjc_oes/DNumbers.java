@@ -62,7 +62,7 @@ class DNumbers {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                presenter.Reporterror("Network Error. Restart your app.");
+                presenter.Reporterror("Unable to connect.Press Refresh ");
             }
         });
         requestQueue.add(jsonObjectRequest);
