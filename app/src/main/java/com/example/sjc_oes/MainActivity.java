@@ -93,12 +93,13 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
                 infoString.setTextColor(Color.BLACK);
                 loadinganimation.setVisibility(View.VISIBLE);
                 loadinganimation.playAnimation();
-                presenterClass.Refresh(0);
+                presenterClass.refresh();
                 buttonrefresh.setVisibility(View.INVISIBLE);
             }
         });
 
     }
+
     private void initComponents(){
         spinner = findViewById(R.id.spinner);
         collegeName = findViewById(R.id.clgname);
@@ -187,6 +188,27 @@ public class MainActivity extends AppCompatActivity implements ContractInterface
         loadinganimation.setVisibility(View.INVISIBLE);
         buttonBack.setVisibility(View.VISIBLE);
         buttonNext.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showNothingFoundError() {
+        loadinganimation.pauseAnimation();
+        loadinganimation.setVisibility(View.INVISIBLE);
+        infoString.setTextColor(Color.RED);
+        buttonBack.setVisibility(View.VISIBLE);
+        buttonNext.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showNoDepartmentFoundError() {
+        loadinganimation.pauseAnimation();
+        loadinganimation.setVisibility(View.INVISIBLE);
+        infoString.setTextColor(Color.RED);
+        infoString.setText("No Data Found..");
+        buttonBack.setVisibility(View.INVISIBLE);
+        buttonNext.setVisibility(View.INVISIBLE);
         spinner.setVisibility(View.INVISIBLE);
     }
 

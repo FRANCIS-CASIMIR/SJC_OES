@@ -10,7 +10,9 @@ interface ContractInterface {
         void PresentDataset(ArrayList<String> strings, String Message);
         void ShowLoadingInfo();
         void Reporterror(String error);
-        void Refresh(int pressedTimes);
+        void refresh();
+        void showNothingFoundError(String errorMessage,int pressedTimes);
+        void showNoDepartmentFoundError();
     }
     interface View{
         void updateArrayList(ArrayList<String> arrayList);
@@ -21,6 +23,7 @@ interface ContractInterface {
         String getpasswordfromuser();
         void Showerrormsg(String error);
         void ReportPasswordError();
-
+        void showNothingFoundError();
+        void showNoDepartmentFoundError();
     }
 }

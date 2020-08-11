@@ -48,16 +48,22 @@ class Departments {
                 DepartmentList.clear();
                 DepartmentIDList.clear();
                 try {
-                    jsonArray = response.getJSONArray("Departments");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonObject = jsonArray.getJSONObject(i);
-                        string = jsonObject.getString("Name");
-                        id = jsonObject.getString("DeptId");
-                        DepartmentList.add(string);
-                        DepartmentIDList.add(id);
-                        System.out.println(string+" "+id);
-                    }
-                    presenter.PresentDataset(DepartmentList,"Select Your Department");
+                        jsonArray = response.getJSONArray("Departments");
+
+                        if(jsonArray.length()!=0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                jsonObject = jsonArray.getJSONObject(i);
+                                string = jsonObject.getString("Name");
+                                id = jsonObject.getString("DeptId");
+                                DepartmentList.add(string);
+                                DepartmentIDList.add(id);
+                                System.out.println(string + " " + id);
+                            }
+                            presenter.PresentDataset(DepartmentList, "Select Your Department");
+                        }
+                        else {
+                            presenter.showNoDepartmentFoundError();
+                        }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     presenter.Reporterror("Error.Try Restarting the App");

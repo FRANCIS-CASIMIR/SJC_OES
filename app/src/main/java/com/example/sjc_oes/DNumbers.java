@@ -46,14 +46,19 @@ class DNumbers {
                 Passwords.clear();
                 try {
                     jsonArray = response.getJSONArray("D_Numbers&Passwords");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonObject = jsonArray.getJSONObject(i);
-                        Dnumber = jsonObject.getString("DNumber");
-                        Password = jsonObject.getString("Password");
-                        DNumbers.add(Dnumber);
-                        Passwords.add(Password);
+                    if (jsonArray.length()!=0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            jsonObject = jsonArray.getJSONObject(i);
+                            Dnumber = jsonObject.getString("DNumber");
+                            Password = jsonObject.getString("Password");
+                            DNumbers.add(Dnumber);
+                            Passwords.add(Password);
+                        }
+                        presenter.PresentDataset(DNumbers, "Select Your D.Number");
                     }
-                    presenter.PresentDataset(DNumbers,"Select Your D.Number");
+                    else {
+                        presenter.showNothingFoundError("Every Student have finished the exam in the selected Subject, Select Other subject",2);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     presenter.Reporterror("Error.Try Restarting the App");
@@ -62,6 +67,7 @@ class DNumbers {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
                 presenter.Reporterror("Unable to connect.Press Refresh ");
             }
         });

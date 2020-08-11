@@ -48,14 +48,19 @@ class Subjects {
                 SubjectIDList.clear();
                 try {
                     jsonArray = response.getJSONArray("Subjects");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonObject = jsonArray.getJSONObject(i);
-                        string = jsonObject.getString("SubjectName");
-                        id = jsonObject.getString("SubjectId");
-                        SubjectList.add(string);
-                        SubjectIDList.add(id);
+                    if(jsonArray.length()!=0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            jsonObject = jsonArray.getJSONObject(i);
+                            string = jsonObject.getString("SubjectName");
+                            id = jsonObject.getString("SubjectId");
+                            SubjectList.add(string);
+                            SubjectIDList.add(id);
+                        }
+                        presenter.PresentDataset(SubjectList, "Select the Subject");
                     }
-                    presenter.PresentDataset(SubjectList,"Select the Subject");
+                    else {
+                        presenter.showNothingFoundError("No Subject found for the selected Course, Select Other Course",1);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                    presenter.Reporterror("Error.Try Restarting the App");

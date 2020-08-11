@@ -133,8 +133,20 @@ class PresenterClass implements ContractInterface.Presenter {
     }
 
     @Override
-    public void Refresh(int pressedTimes) {
-        PressedTimes = pressedTimes;
+    public void refresh() {
+        PressedTimes = 0;
         getDataSet();
+    }
+
+    @Override
+    public void showNothingFoundError(String errorMessage,int pressedTimes) {
+        view.showMessage(errorMessage);
+        PressedTimes = pressedTimes;
+        view.showNothingFoundError();
+    }
+
+    @Override
+    public void showNoDepartmentFoundError() {
+        view.showNoDepartmentFoundError();
     }
 }
